@@ -34,7 +34,7 @@ jobs:
       run: dotnet restore ${{ inputs.project }} -r ${{ matrix.os.arch }}
 
     - name: build x64
-      run: dotnet publish ${{ inputs.project }} -c Release -r ${{ matrix.os.arch }} --self-contained true -o bin/${{ matrix.os.arch }}
+      run: dotnet publish ${{ inputs.project }} -c Release -r ${{ matrix.os.arch }} -o bin/${{ matrix.os.arch }}
 
     - name: compress x64
       run: 7z a ${{ inputs.project }}-${{ matrix.os.arch }}-${{ inputs.version }}.zip ./bin/${{ matrix.os.arch }}/*
