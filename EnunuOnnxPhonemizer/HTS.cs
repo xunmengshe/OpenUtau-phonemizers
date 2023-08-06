@@ -7,7 +7,7 @@ using System.Linq;
 
 //HTS labels use b instead of #
 //In HTS labels, "xx" is a preserved keyword that means null
-namespace OpenUtau.Plugin.Builtin.EnunuOnnx {
+namespace EnunuOnnxPhonemizer.EnunuOnnx {
     public static class HTS {
         public static readonly string[] KeysInOctave = {
             "C",
