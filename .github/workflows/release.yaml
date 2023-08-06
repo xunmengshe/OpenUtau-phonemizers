@@ -1,0 +1,47 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version Number'
+        default: '0.0.0.0'
+        required: true
+        type: string
+      project:
+        description: 'the project to be compiled'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os.runs-on }}
+
+    strategy:
+      matrix:
+        os: 
+          - runs-on: windows-latest
+            arch: win-x64
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Patch Versions
+      uses: justalemon/VersionPatcher@master
+      with:
+        version: ${{ inputs.version }}
+        csproj-files: "${{ inputs.project }}/*.csproj"
+
+    - name: restore x64
+      run: dotnet restore ${{ inputs.project }} -r ${{ matrix.os.arch }}
+
+    - name: build x64
+      run: dotnet publish ${{ inputs.project }} -c Release -r ${{ matrix.os.arch }} --self-contained true -o bin/${{ matrix.os.arch }}
+
+    - name: compress x64
+      run: 7z a ${{ inputs.project }}-${{ matrix.os.arch }}-${{ inputs.version }}.zip ./bin/${{ matrix.os.arch }}/*
+     
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ inputs.project }}-${{ matrix.os.arch }}-${{ inputs.version }}.zip
+        path: ${{ inputs.project }}-${{ matrix.os.arch }}-${{ inputs.version }}.zip
+        
