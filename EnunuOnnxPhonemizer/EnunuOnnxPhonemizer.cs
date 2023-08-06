@@ -6,19 +6,19 @@ using System.Text;
 using System.Text.RegularExpressions;
 using OpenUtau.Core.Ustx;
 using OpenUtau.Api;
-using OpenUtau.Plugin.Builtin.EnunuOnnx.nnmnkwii.io.hts;
+using EnunuOnnxPhonemizer.EnunuOnnx.nnmnkwii.io.hts;
 using Microsoft.ML.OnnxRuntime;
-using OpenUtau.Plugin.Builtin.EnunuOnnx.nnmnkwii.frontend;
+using EnunuOnnxPhonemizer.EnunuOnnx.nnmnkwii.frontend;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Serilog;
-using OpenUtau.Plugin.Builtin.EnunuOnnx;
+using EnunuOnnxPhonemizer.EnunuOnnx;
 using OpenUtau.Core;
 
 //This phonemizer is a pure C# implemention of the ENUNU phonemizer,
 //which aims at providing all ML-based synthesizer developers with a useable phonemizer,
 //This phonemizer uses onnxruntime to run ML models. No Python needed. 
 
-namespace OpenUtau.Plugin.Builtin {
+namespace EnunuOnnxPhonemizer {
     [Phonemizer("Enunu Onnx Phonemizer", "ENUNU X")]
     public class EnunuOnnxPhonemizer : Phonemizer {
         readonly string PhonemizerType = "ENUNU X";
@@ -143,7 +143,7 @@ namespace OpenUtau.Plugin.Builtin {
             if (File.Exists(enunuxPath)) {
                 try {
                     var input = File.ReadAllText(enunuxPath, singer.TextFileEncoding);
-                    var data = Core.Yaml.DefaultDeserializer.Deserialize<G2pDictionaryData>(input);
+                    var data = Yaml.DefaultDeserializer.Deserialize<G2pDictionaryData>(input);
                     if (data.symbols != null) {
                         foreach (var symbolData in data.symbols) {
                             builder.AddSymbol(symbolData.symbol, symbolData.type);
