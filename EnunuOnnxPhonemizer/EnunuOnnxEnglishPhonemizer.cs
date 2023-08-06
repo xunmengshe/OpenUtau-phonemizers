@@ -6,7 +6,7 @@ using OpenUtau.Api;
 using OpenUtau.Core.G2p;
 using Serilog;
 
-namespace OpenUtau.Plugin.Builtin {
+namespace EnunuOnnxPhonemizer {
     [Phonemizer("Enunu Onnx English Phonemizer", "ENUNU X EN", language:"EN")]
     public class EnunuOnnxEnglishPhonemizer : EnunuOnnxPhonemizer {
         protected override IG2p LoadG2p(string rootPath) {

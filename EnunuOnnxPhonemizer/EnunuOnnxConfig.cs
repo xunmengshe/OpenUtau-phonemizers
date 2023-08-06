@@ -8,7 +8,7 @@ using OpenUtau.Core;
 
 //data class used to deserialize enunux.yaml, ENUNU X specific settings
 
-namespace OpenUtau.Plugin.Builtin.EnunuOnnx {
+namespace EnunuOnnxPhonemizer.EnunuOnnx {
     public struct RedirectionData {
         public string[] from;
         public string to;

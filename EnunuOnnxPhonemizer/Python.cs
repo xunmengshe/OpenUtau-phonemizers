@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace OpenUtau.Plugin.Builtin.EnunuOnnx.nnmnkwii.python {
+namespace EnunuOnnxPhonemizer.EnunuOnnx.python {
     public class AssertionError : Exception {
 
         public AssertionError() : base() { }
